@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
-function SignIn({ setUser }) {
+function SignIn({ setUser, setAdmin }) {
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -19,16 +19,25 @@ function SignIn({ setUser }) {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/sign-in`, formData);
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/auth/sign-in`,
+        formData,
+      );
       const token = response.data.token;
+      localStorage.setItem("token", token);
 
-      const userInfo = JSON.parse(atob(token.split('.')[1])).payload;
-      setUser(userInfo);
-      localStorage.setItem('token', token);
-
-      navigate('/dashboard');
+      const userInfo = JSON.parse(atob(token.split(".")[1])).payload;
+      if (userInfo.role === "user") {
+        setUser(userInfo);
+        navigate("/dashboard");
+      } else {
+        setAdmin(userInfo)
+        navigate("/admin-dashboard");
+      }
     } catch (err) {
-      setErrorMessage(err.response?.data?.err || 'An error occurred during sign in');
+      setErrorMessage(
+        err.response?.data?.err || "An error occurred during sign in",
+      );
     }
   };
 
@@ -60,7 +69,11 @@ function SignIn({ setUser }) {
         </div>
         <button type="submit">Sign In</button>
       </form>
-      {errorMessage && <p style={{ color: 'red' }} role="alert">{errorMessage}</p>}
+      {errorMessage && (
+        <p style={{ color: "red" }} role="alert">
+          {errorMessage}
+        </p>
+      )}
     </div>
   );
 }

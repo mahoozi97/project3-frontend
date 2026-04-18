@@ -1,37 +1,65 @@
-import { useState, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router';
-import Homepage from './pages/Homepage';
-import SignUp from './pages/Signup';
-import SignIn from './pages/SignIn';
-import Navbar from './components/Navbar';
-import Dashboard from './pages/Dashboard';
+import { useState, useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router";
+import Homepage from "./pages/Homepage";
+import SignUp from "./pages/Signup";
+import SignIn from "./pages/SignIn";
+import Navbar from "./components/Navbar";
+import Dashboard from "./pages/Dashboard";
+import { AdminDashboard } from "./pages/admin/AdminDashboard";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [admin, setAdmin] = useState(null);
 
-  
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       try {
-        const userInfo = JSON.parse(atob(token.split('.')[1])).payload;
+        const userInfo = JSON.parse(atob(token.split(".")[1])).payload;
         setUser(userInfo);
       } catch (err) {
-        console.error('Invalid token:', err);
-        localStorage.removeItem('token');
+        console.error("Invalid token:", err);
+        localStorage.removeItem("token");
       }
     }
   }, []);
 
   return (
     <div>
-      <Navbar user={user} setUser={setUser} />
+      <Navbar user={user} setUser={setUser} admin={admin} setAdmin={setAdmin} />
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/sign-up" element={!user ? <SignUp /> : <Navigate to='/dashboard'/>} />
-        <Route path="/sign-in" element={!user ? <SignIn setUser={setUser} /> : <Navigate to='/dashboard'/>} />
-        <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Navigate to='/sign-in'/>} />
+        <Route
+          path="/sign-up"
+          element={!user ? <SignUp /> : <Navigate to="/dashboard" />}
+        />
+        <Route
+          path="/sign-in"
+          element={
+            !user ? (
+              <SignIn setUser={setUser} setAdmin={setAdmin} />
+            ) : (
+              <Navigate to="/dashboard" />
+            )
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            user ? <Dashboard user={user} /> : <Navigate to="/sign-in" />
+          }
+        />
 
+        <Route
+          path="/admin-dashboard"
+          element={
+            admin ? (
+              <AdminDashboard admin={admin} />
+            ) : (
+              <Navigate to={"/sign-in"} />
+            )
+          }
+        />
       </Routes>
     </div>
   );
