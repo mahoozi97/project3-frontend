@@ -6,6 +6,7 @@ import SignIn from "./pages/SignIn";
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
+import { BookingForm } from "./pages/BookingForm";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -47,6 +48,13 @@ function App() {
           path="/dashboard"
           element={
             user ? <Dashboard user={user} /> : <Navigate to="/sign-in" />
+          }
+        />
+
+        <Route
+          path="/dashboard/new"
+          element={
+            user ? <BookingForm /> : <Navigate to="/sign-in" />
           }
         />
 
