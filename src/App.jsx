@@ -7,10 +7,13 @@ import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { BookingForm } from "./pages/BookingForm";
+import { Spin } from "antd";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
   const [user, setUser] = useState(null);
   const [admin, setAdmin] = useState(null);
+  const [isToken, setIsToken] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -23,7 +26,20 @@ function App() {
         localStorage.removeItem("token");
       }
     }
+    setIsToken(false);
   }, []);
+
+  if (isToken) {
+    return (
+      <>
+        <Spin
+          style={{ marginTop: "20px" }}
+          description="Loading"
+          size="large"
+        />
+      </>
+    );
+  }
 
   return (
     <div>
@@ -44,19 +60,11 @@ function App() {
             )
           }
         />
-        <Route
-          path="/dashboard"
-          element={
-            user ? <Dashboard user={user} /> : <Navigate to="/sign-in" />
-          }
-        />
-
-        <Route
-          path="/dashboard/new"
-          element={
-            user ? <BookingForm /> : <Navigate to="/sign-in" />
-          }
-        />
+        {/* Protected Routes */}
+        <Route element={<ProtectedRoute user={user} />}>
+          <Route path="/dashboard" element={<Dashboard user={user} />} />
+          <Route path="/dashboard/new" element={<BookingForm />} />
+        </Route>
 
         <Route
           path="/admin-dashboard"
