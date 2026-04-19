@@ -77,6 +77,7 @@ function Dashboard({ user }) {
             <p>Destination: {book.destination}</p>
             <p>Date: {formatBookingDate(book.date)}</p>
             <p>Driver: {book.driver}</p>
+            <p>Status: {book.status}</p>
 
             <Button>
               <Link to={""}>Edit</Link>
