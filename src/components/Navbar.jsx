@@ -24,6 +24,10 @@ function Navbar({ user, setUser, admin, setAdmin }) {
             Dashboard
           </Link>
 
+          <Link className="nav-item" to="/dashboard/new">
+            Book Now
+          </Link>
+
           <span className="nav-item">{user.username}</span>
 
           <button className="nav-item" onClick={logOut}>

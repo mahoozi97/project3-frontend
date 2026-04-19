@@ -8,21 +8,21 @@ const newBooking = async (token, data) => {
   });
 };
 
-const fetchAllBooking = async (token) => {
+const getAllBooking = async (token) => {
   const res = await axios.get(`${BASE_URL}/booking`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return res.data;
 };
 
-const fetchAllBookingByUserId = async (token) => {
-  const res = await axios.get(`${BASE_URL}/booking/my-booking`, {
+const getAllBookingByUserId = async (token) => {
+  const res = await axios.get(`${BASE_URL}/booking/my-bookings`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return res.data;
 };
 
-const fetchBookingById = async (token, id) => {
+const getBookingById = async (token, id) => {
   const res = await axios.get(`${BASE_URL}/booking/${id}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -43,9 +43,9 @@ const deleteBooking = async (token, id) => {
 
 export {
   newBooking,
-  fetchAllBooking,
-  fetchAllBookingByUserId,
-  fetchBookingById,
+  getAllBooking,
+  getAllBookingByUserId,
+  getBookingById,
   editBooking,
   deleteBooking,
 };
