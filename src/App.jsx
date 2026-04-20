@@ -45,7 +45,8 @@ function App() {
     <div>
       <Navbar user={user} setUser={setUser} admin={admin} setAdmin={setAdmin} />
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/"
+          element={<Homepage />} />
         <Route
           path="/sign-up"
           element={!user ? <SignUp /> : <Navigate to="/dashboard" />}
@@ -63,7 +64,7 @@ function App() {
         {/* Protected Routes */}
         <Route element={<ProtectedRoute user={user} />}>
           <Route path="/dashboard" element={<Dashboard user={user} />} />
-          <Route path="/dashboard/new" element={<BookingForm />} />
+          <Route path="/book-now" element={<BookingForm />} />
         </Route>
 
         <Route
