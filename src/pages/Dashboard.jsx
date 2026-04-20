@@ -22,23 +22,17 @@ function Dashboard({ user }) {
     }
   };
 
-  const formatBookingDate = (isoString) => {
-    if (!isoString) return "";
-
-    const date = new Date(isoString);
-
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-
-    let hours = date.getHours();
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    const ampm = hours >= 12 ? "PM" : "AM";
-
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-
-    return `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
+  const formatDate = (isoDate) => {
+    return new Date(isoDate).toLocaleString("en-GB", {
+      timeZone: "Asia/Bahrain",
+      weekday: "short",
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
   };
 
   const cancelBooking = async (id) => {
@@ -75,7 +69,7 @@ function Dashboard({ user }) {
             <p>Name: {book.name}</p>
             <p>CPR: {book.cpr}</p>
             <p>Destination: {book.destination}</p>
-            <p>Date: {formatBookingDate(book.date)}</p>
+            <p>Date: {formatDate(book.date)}</p>
             <p>Driver: {book.driver}</p>
             <p>Status: {book.status}</p>
 
