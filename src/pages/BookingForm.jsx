@@ -18,21 +18,14 @@ export const BookingForm = () => {
   const onSubmit = async (data) => {
     try {
       const token = localStorage.getItem("token");
-
-      const dateWithOffset = `${data.date}:00+03:00`;
-
-      const payload = {
-        ...data,
-        date: dateWithOffset,
-      };
-
-      await newBooking(token, payload);
+      await newBooking(token, data);
       navigate("/dashboard");
     } catch (error) {
       console.log("Error:", error.response?.data?.error || error.message);
       setErrorMessage(error.response?.data?.error || error.message);
     }
   };
+
   return (
     <>
       <h1>Booking Form</h1>
@@ -90,7 +83,7 @@ export const BookingForm = () => {
           Date:
           <input
             type="datetime-local"
-            // min={new Date().toISOString().slice(0, 16)}
+            min={new Date().toISOString().slice(0, 16)}
             {...register("date", { required: "Select date and time" })}
           />
         </label>
