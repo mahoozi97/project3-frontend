@@ -47,6 +47,8 @@ export const BookingForm = () => {
           />
         </label>
 
+        <br /> <br />
+
         <label>
           CPR:
           <input
@@ -61,6 +63,8 @@ export const BookingForm = () => {
           />
         </label>
 
+        <br /> <br />
+
         <label>
           Destination:
           <input
@@ -71,6 +75,8 @@ export const BookingForm = () => {
           />
         </label>
 
+        <br /> <br />
+
         <label>
           Mobile No.:
           <input
@@ -78,6 +84,8 @@ export const BookingForm = () => {
             {...register("phoneNumber", { required: "Mobile No. is required" })}
           />
         </label>
+
+        <br /> <br />
 
         <label>
           Date:
@@ -87,6 +95,8 @@ export const BookingForm = () => {
             {...register("date", { required: "Select date and time" })}
           />
         </label>
+
+        <br /> <br />
 
         <label>
           Driver:
@@ -99,6 +109,8 @@ export const BookingForm = () => {
             ))}
           </select>
         </label>
+
+        <br /> <br />
 
         <Button htmlType="submit">Book</Button>
       </form>
