@@ -25,7 +25,7 @@ function Navbar({ user, setUser, admin, setAdmin }) {
           </Link>
 
           <Link className="nav-item" to="/book-now">
-            Book Now
+            Book Now2
           </Link>
 
           <span className="nav-item">{user.username}</span>
