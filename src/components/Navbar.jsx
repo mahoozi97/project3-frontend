@@ -24,7 +24,7 @@ function Navbar({ user, setUser, admin, setAdmin }) {
             Dashboard
           </Link>
 
-          <Link className="nav-item" to="/dashboard/new">
+          <Link className="nav-item" to="/book-now">
             Book Now
           </Link>
 
