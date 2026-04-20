@@ -45,7 +45,8 @@ function App() {
     <div>
       <Navbar user={user} setUser={setUser} admin={admin} setAdmin={setAdmin} />
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/"
+          element={<Homepage />} />
         <Route
           path="/sign-up"
           element={!user ? <SignUp /> : <Navigate to="/dashboard" />}
