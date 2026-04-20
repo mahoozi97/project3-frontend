@@ -63,7 +63,7 @@ function App() {
         {/* Protected Routes */}
         <Route element={<ProtectedRoute user={user} />}>
           <Route path="/dashboard" element={<Dashboard user={user} />} />
-          <Route path="/dashboard/new" element={<BookingForm />} />
+          <Route path="/book-now" element={<BookingForm />} />
         </Route>
 
         <Route
