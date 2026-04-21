@@ -1,61 +1,102 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router";
-import { createBlog, getBlogById, updateBlog } from "../../services/blogService";
+import { useForm } from "react-hook-form";
+import { newBooking } from "../services/bookingService";
+import { useNavigate } from "react-router";
+import { useState } from "react";
+import { Button } from "antd";
 
-const BlogForm = () => {
-  // FIX: Added `title` field — blogs have titles but it was missing from the form
-  const [formData, setFormData] = useState({ title: "", description: "", image: "" });
-  const { id } = useParams();
+export const BookingForm = () => {
+  const [errorMessage, setErrorMessage] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (id) {
-      getBlogById(id).then(res => setFormData(res.data));
-    }
-  }, [id]);
+  const drivers = ["Ahmed", "Ali", "Husain", "Taha"];
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
     try {
-      if (id) {
-        await updateBlog(id, formData);
-      } else {
-        await createBlog(formData);
-      }
-      // FIX: was "/admin" but the actual admin dashboard route is "/admin-dashboard"
-      navigate("/admin-dashboard");
-    } catch (err) {
-      console.error("Save failed", err);
+      const token = localStorage.getItem("token");
+      await newBooking(token, data);
+      navigate("/dashboard");
+    } catch (error) {
+      console.log("Error:", error.response?.data?.error || error.message);
+      setErrorMessage(error.response?.data?.error || error.message);
     }
   };
 
   return (
-    <div className="form-container">
-      <h2>{id ? "Edit Blog" : "Create New Blog"}</h2>
-      <form onSubmit={handleSubmit}>
-        {/* FIX: Added title field to match blog data model */}
-        <label>Title</label>
-        <input
-          type="text"
-          value={formData.title}
-          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-          required
-        />
-        <label>Image URL</label>
-        <input
-          type="text"
-          value={formData.image}
-          onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-        />
-        <label>Description</label>
-        <textarea
-          value={formData.description}
-          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-        />
-        <button type="submit">Save Blog</button>
+    <>
+      <h1>Booking Form</h1>
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {/* form error */}
+        {Object.values(errors).map((error, index) => (
+          <p key={index} style={{ color: "red" }}>
+            {error.message}
+          </p>
+        ))}
+        <label>
+          Name:
+          <input
+            type="text"
+            {...register("name", { required: "Name is required" })}
+          />
+        </label>
+        <br /> <br />
+        <label>
+          CPR:
+          <input
+            type="number"
+            {...register("cpr", {
+              required: "CPR is required",
+            })}
+          />
+        </label>
+        <br /> <br />
+        <label>
+          Destination:
+          <input
+            type="text"
+            {...register("destination", {
+              required: "Destination is required",
+            })}
+          />
+        </label>
+        <br /> <br />
+        <label>
+          Mobile No.:
+          <input
+            type="number"
+            {...register("phoneNumber", { required: "Mobile No. is required" })}
+          />
+        </label>
+        <br /> <br />
+        <label>
+          Date:
+          <input
+            type="datetime-local"
+            min={new Date().toISOString().slice(0, 16)}
+            {...register("date", { required: "Select date and time" })}
+          />
+        </label>
+        <br /> <br />
+        <label>
+          Driver:
+          <select {...register("driver", { required: "Select driver" })}>
+            <option value="">-- Select --</option>
+            {drivers.map((driver) => (
+              <option key={driver} value={driver}>
+                {driver}
+              </option>
+            ))}
+          </select>
+        </label>
+        <br /> <br />
+        <Button htmlType="submit">Book</Button>
       </form>
-    </div>
+    </>
   );
 };
-
-export default BlogForm;
