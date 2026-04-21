@@ -8,9 +8,9 @@ function Homepage() {
       <p>Discover our amazing products and services</p>
 
       <br /> <br />
-      <Link to="/dashboard/new"><button className='btn'>Book Now</button></Link>
+      <Link to="/book-now"><button className='btn'>Book Now</button></Link>
       <br /> <br />
-      <Link to="/blog"><button className='btn'>Read more</button></Link>
+      <Link to="/blogs"><button className='btn'>Read more</button></Link>
     </div>  
   )
 }
