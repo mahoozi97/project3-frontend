@@ -82,5 +82,6 @@ return (
         )}
     </div>
 )
+}
 
 export default BlogDetail

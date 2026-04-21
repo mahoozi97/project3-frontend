@@ -16,30 +16,35 @@ function SignIn({ setUser, setAdmin }) {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/auth/sign-in`,
-        formData,
-      );
-      const token = response.data.token;
-      localStorage.setItem("token", token);
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_BACKEND_URL}/auth/sign-in`,
+      formData,
+    );
+    const token = response.data.token;
+    localStorage.setItem("token", token);
 
-      const userInfo = JSON.parse(atob(token.split(".")[1])).payload;
-      if (userInfo.role === "user") {
-        setUser(userInfo);
-        navigate("/dashboard");
-      } else {
-        setAdmin(userInfo)
-        navigate("/admin-dashboard");
-      }
-    } catch (err) {
-      setErrorMessage(
-        err.response?.data?.err || "An error occurred during sign in",
-      );
+    // Decode token
+    const userInfo = JSON.parse(atob(token.split(".")[1])).payload;
+
+    // We ALWAYS set user so the app knows someone is authenticated
+    setUser(userInfo); 
+
+    if (userInfo.role === "admin") {
+      setAdmin(userInfo);
+      navigate("/admin-dashboard");
+    } else {
+      setAdmin(null); // Ensure state is cleared if a user logs in after an admin
+      navigate("/dashboard");
     }
-  };
+  } catch (err) {
+    setErrorMessage(
+      err.response?.data?.err || "An error occurred during sign in",
+    );
+  }
+};
 
   return (
     <div>

@@ -30,26 +30,40 @@ const AdminDashboard = () => {
   }
   
   return (
-    <div className="admin-dashboard">
-      <h2>Admin Dashboard</h2>
-      <Link to="/admin/create"><button>Create New Blog</button></Link>
-      
-      <table>
+    <div className="admin-container">
+      <h2>Admin Management</h2>
+      {/* This link is OUTSIDE the loop, it doesn't need an ID */}
+      <Link to="/admin/blogs/create">
+        <button>Create New Blog Post</button>
+      </Link>
+
+      <table className="admin-table">
         <thead>
-          <tr> {/* table rows + table headers- took reference from external sources to conduct this process*/}
-            <th>ID</th>
-            <th>Description Snippet</th>
+          <tr>
+            <th>Image</th>
+            <th>Description</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {blogs.map((blog) => (
             <tr key={blog._id}>
-              <td>{blog._id}</td>
-              <td>{blog.description.substring(0, 50)}...</td>
+              <td><img src={blog.image} width="50" alt="thumbnail" /></td>
+              <td>{blog.description.substring(0, 30)}...</td>
               <td>
-                <Link to={`/admin/edit/${blog._id}`}>Edit</Link>
-                <button onClick={() => handleDelete(blog._id)}>Delete</button>
+                {/* For the inside of this loop, "blog" refers to the specific item.
+                   This is where ${blog._id} is recognized
+                */}
+                <Link 
+                  to={`/admin/blogs/edit/${blog._id}`} 
+                  style={{ marginRight: "10px" }}
+                >
+                  Edit
+                </Link>
+                
+                <button onClick={() => handleDelete(blog._id)}>
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
@@ -58,5 +72,4 @@ const AdminDashboard = () => {
     </div>
   );
 };
-
 export default AdminDashboard;
