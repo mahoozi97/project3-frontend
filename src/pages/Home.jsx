@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getAllBlogs } from '../services/blogService'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import "../styles/main.css"
 
 const Home = () => {
