@@ -11,10 +11,6 @@ function SignIn({ setUser, setAdmin }) {
 
   const navigate = useNavigate();
 
-  const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -27,18 +23,28 @@ function SignIn({ setUser, setAdmin }) {
       localStorage.setItem("token", token);
 
       const userInfo = JSON.parse(atob(token.split(".")[1])).payload;
-      if (userInfo.role === "user") {
-        setUser(userInfo);
-        navigate("/dashboard");
-      } else {
-        setAdmin(userInfo)
+
+      // FIX: save userId so BlogDetail can identify the current user
+      localStorage.setItem("userId", userInfo._id);
+
+      setUser(userInfo);
+
+      if (userInfo.role === "admin") {
+        setAdmin(userInfo);
         navigate("/admin-dashboard");
+      } else {
+        setAdmin(null);
+        navigate("/dashboard");
       }
     } catch (err) {
       setErrorMessage(
         err.response?.data?.err || "An error occurred during sign in",
       );
     }
+  };
+
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   return (

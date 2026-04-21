@@ -1,63 +1,47 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 function Navbar({ user, setUser, admin, setAdmin }) {
+  const navigate = useNavigate();
+
   function logOut() {
     localStorage.removeItem("token");
-    if (user) {
-      setUser(null);
-    } else if (admin) {
-      setAdmin(null);
-    }
+    // FIX: also clear userId, otherwise the next person who uses the browser
+    // inherits the previous user's identity for comment ownership
+    localStorage.removeItem("userId");
+    setUser(null);
+    setAdmin(null);
+    navigate("/");
   }
 
   return (
-    <div>
-      {/* Routes seen by everyone */}
-      <Link className="nav-item" to="/">
-        Homepage
-      </Link>
+    <nav className="navbar">
+      <Link className="nav-item" to="/">Homepage</Link>
+      <Link className="nav-item" to="/blogs">Blogs</Link>
 
       {user ? (
-        // Links for protected routes only for logged in users
         <>
-          <Link className="nav-item" to="/dashboard">
-            Dashboard
-          </Link>
+          {admin ? (
+            <Link className="nav-item" to="/admin-dashboard">Admin Dashboard</Link>
+          ) : (
+            <>
+              <Link className="nav-item" to="/dashboard">Dashboard</Link>
+              <Link className="nav-item" to="/book-now">Book Now</Link>
+            </>
+          )}
 
-          <Link className="nav-item" to="/book-now">
-            Book Now
-          </Link>
+          <span className="nav-item" style={{ fontWeight: "bold" }}>
+            Hi, {user.username || user.name} ({user.role})
+          </span>
 
-          <span className="nav-item">{user.username}</span>
-
-          <button className="nav-item" onClick={logOut}>
-            Log Out
-          </button>
-        </>
-      ) : admin ? (
-        <>
-          <Link className="nav-item" to="/admin-dashboard">
-            Dashboard
-          </Link>
-
-          <span className="nav-item">{admin.role}</span>
-
-          <button className="nav-item" onClick={logOut}>
-            Log Out
-          </button>
+          <button className="nav-item" onClick={logOut}>Log Out</button>
         </>
       ) : (
-        // links for not logged in users
         <>
-          <Link className="nav-item" to="/sign-up">
-            Sign up
-          </Link>
-          <Link className="nav-item" to="/sign-in">
-            Sign in
-          </Link>
+          <Link className="nav-item" to="/sign-up">Sign up</Link>
+          <Link className="nav-item" to="/sign-in">Sign in</Link>
         </>
       )}
-    </div>
+    </nav>
   );
 }
 
