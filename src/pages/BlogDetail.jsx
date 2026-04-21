@@ -25,7 +25,8 @@ const BlogDetail = () => {
   const handleAddComment = async (e) => {
     e.preventDefault()
     try {
-      await addComment(id, { text: commentText, userId: currentUserId })
+      // FIX: don't send userId from client — backend reads it from the token
+      await addComment(id, { text: commentText })
       setCommentText('')
       loadBlog()
     } catch (error) {
@@ -59,9 +60,9 @@ const BlogDetail = () => {
           <strong>{comment.userId?.name || "User"}</strong>
           <span>{comment.text}</span>
 
-          {/* FIX: was `comment.userId === comment.userId` (always true).
-              Now correctly compares the comment author's ID to the logged-in user's ID */}
-          {comment.userId?._id === currentUserId && (
+          {/* FIX: .toString() needed because after populate, comment.userId._id
+              is a Mongoose ObjectId, not a plain string */}
+          {comment.userId?._id?.toString() === currentUserId && (
             <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>
           )}
         </div>
