@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { getBlogById, addComment, deleteComment } from '../services/blogService'
 
-const BlogDetail = ({user}) => {
+const BlogDetail = () => {
   const { id } = useParams()
   const [blog, setBlog] = useState(null)
   const [commentText, setCommentText] = useState('')
@@ -61,7 +61,7 @@ const BlogDetail = ({user}) => {
 
           {/* FIX: was `comment.userId === comment.userId` (always true).
               Now correctly compares the comment author's ID to the logged-in user's ID */}
-          {comment.userId?._id === user._id && (
+          {comment.userId?._id === currentUserId && (
             <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>
           )}
         </div>
