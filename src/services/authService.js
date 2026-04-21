@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/auth";
+// FIX: was hardcoded "http://localhost:3000" — now uses the env variable
+// to match how SignIn.jsx makes its requests
+const API_URL = `${import.meta.env.VITE_BACKEND_URL}/auth`;
 
 export const login = async (formData) => {
   const res = await axios.post(`${API_URL}/sign-in`, formData);

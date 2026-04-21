@@ -27,7 +27,7 @@ const BlogDetail = () => {
     try {
       await addComment(id, { text: commentText, userId: currentUserId })
       setCommentText('')
-      loadBlog() //to refresh the blog details and show the new comment
+      loadBlog()
     } catch (error) {
       console.error("Error adding comment:", error)
     }
@@ -40,48 +40,49 @@ const BlogDetail = () => {
     } catch (error) {
       console.error("Error deleting comment:", error)
     }
-}
+  }
 
-if (!blog) {
+  if (!blog) {
     return <p>Loading...</p>
-}
+  }
 
-return (
+  return (
     <div className='blog-detail'>
-        <h1>{blog.title}</h1>
-        <img src={blog.image} alt="Blog cover" />
-        <p>{blog.description}</p>
+      <h1>{blog.title}</h1>
+      <img src={blog.image} alt="Blog cover" />
+      <p>{blog.description}</p>
 
-        <hr />
-        <h3>Comments</h3>
-        {blog.comments.map((comment) => (
-            <div key={comment._id} className='comment'>
-                <strong>{comment.userId?.name || "User"}</strong>
-                <span>{comment.text}</span>
+      <hr />
+      <h3>Comments</h3>
+      {blog.comments.map((comment) => (
+        <div key={comment._id} className='comment'>
+          <strong>{comment.userId?.name || "User"}</strong>
+          <span>{comment.text}</span>
 
-                {/* only show the delete option if the comment belongs to the current user */}
-                {comment.userId === comment.userId && (
-                    <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>
-                )}
-            </div>
-        ))}
+          {/* FIX: was `comment.userId === comment.userId` (always true).
+              Now correctly compares the comment author's ID to the logged-in user's ID */}
+          {comment.userId?._id === currentUserId && (
+            <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>
+          )}
+        </div>
+      ))}
 
-        {currentUserId ? (
-            <form onSubmit={handleAddComment}>
-                <input
-                    type="text"
-                    value={commentText}
-                    onChange={(e) => setCommentText(e.target.value)}
-                    placeholder="Add a comment"
-                    required
-                />
-                <button type="submit">Add Comment</button>
-            </form>
-        ) : (
-            <p>Please log in to add a comment.</p>
-        )}
+      {currentUserId ? (
+        <form onSubmit={handleAddComment}>
+          <input
+            type="text"
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
+            placeholder="Add a comment"
+            required
+          />
+          <button type="submit">Add Comment</button>
+        </form>
+      ) : (
+        <p>Please log in to add a comment.</p>
+      )}
     </div>
-)
+  )
 }
 
 export default BlogDetail

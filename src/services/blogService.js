@@ -1,11 +1,13 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/blogs";
+// FIX: URL was hardcoded — now uses the env variable
+// to be consistent with authService and avoid port mismatch issues
+const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api/blogs`;
 
 const authHeader = () => {
-    const token = localStorage.getItem("token");
-    return { headers: { Authorization: `Bearer ${token}` } };
-}
+  const token = localStorage.getItem("token");
+  return { headers: { Authorization: `Bearer ${token}` } };
+};
 
 export const getAllBlogs = () => axios.get(`${API_URL}`);
 export const getBlogById = (id) => axios.get(`${API_URL}/${id}`);
