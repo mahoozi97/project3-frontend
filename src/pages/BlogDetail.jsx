@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { getBlogById, addComment, deleteComment } from '../services/blogService'
 
-<<<<<<< HEAD
 const BlogDetail = ({user}) => {
-=======
-const BlogDetail = () => {
->>>>>>> ahmed/blog-routes
   const { id } = useParams()
   const [blog, setBlog] = useState(null)
   const [commentText, setCommentText] = useState('')
@@ -29,13 +25,7 @@ const BlogDetail = () => {
   const handleAddComment = async (e) => {
     e.preventDefault()
     try {
-<<<<<<< HEAD
       await addComment(id, { text: commentText, userId: currentUserId })
-=======
-      // FIX: only send text — backend now gets userId from the token,
-      // not from the request body
-      await addComment(id, { text: commentText })
->>>>>>> ahmed/blog-routes
       setCommentText('')
       loadBlog()
     } catch (error) {
@@ -69,15 +59,9 @@ const BlogDetail = () => {
           <strong>{comment.userId?.name || "User"}</strong>
           <span>{comment.text}</span>
 
-<<<<<<< HEAD
           {/* FIX: was `comment.userId === comment.userId` (always true).
               Now correctly compares the comment author's ID to the logged-in user's ID */}
           {comment.userId?._id === user._id && (
-=======
-          {/* FIX: after populate, comment.userId is an object, so we need
-              .toString() to compare the ObjectId to the plain string from localStorage */}
-          {comment.userId?._id?.toString() === currentUserId && (
->>>>>>> ahmed/blog-routes
             <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>
           )}
         </div>

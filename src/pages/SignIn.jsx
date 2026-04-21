@@ -22,7 +22,6 @@ function SignIn({ setUser, setAdmin }) {
     const token = response.data.token;
     localStorage.setItem("token", token);
 
-<<<<<<< HEAD
     // Decode token
     const userInfo = JSON.parse(atob(token.split(".")[1])).payload;
 
@@ -35,26 +34,6 @@ function SignIn({ setUser, setAdmin }) {
     } else {
       setAdmin(null); // Ensure state is cleared if a user logs in after an admin
       navigate("/dashboard");
-=======
-      const userInfo = JSON.parse(atob(token.split(".")[1])).payload;
-
-      // FIX: save userId so BlogDetail can identify the current user
-      localStorage.setItem("userId", userInfo._id);
-
-      setUser(userInfo);
-
-      if (userInfo.role === "admin") {
-        setAdmin(userInfo);
-        navigate("/admin-dashboard");
-      } else {
-        setAdmin(null);
-        navigate("/dashboard");
-      }
-    } catch (err) {
-      setErrorMessage(
-        err.response?.data?.err || "An error occurred during sign in",
-      );
->>>>>>> ahmed/blog-routes
     }
   } catch (err) {
     setErrorMessage(
