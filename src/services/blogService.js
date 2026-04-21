@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// FIX: URL was hardcoded — now uses the env variable
+// FIX: was hardcoded "http://localhost:5000/api/blogs" — now uses the env variable
 // to be consistent with authService and avoid port mismatch issues
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api/blogs`;
 
