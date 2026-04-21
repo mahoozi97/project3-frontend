@@ -1,6 +1,8 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 function Navbar({ user, setUser, admin, setAdmin }) {
+  const navigate = useNavigate();
+
   function logOut() {
     localStorage.removeItem("token");
     if (user) {
@@ -11,11 +13,9 @@ function Navbar({ user, setUser, admin, setAdmin }) {
   }
 
   return (
-    <div>
-      {/* Routes seen by everyone */}
-      <Link className="nav-item" to="/">
-        Homepage
-      </Link>
+    <nav className="navbar">
+      <Link className="nav-item" to="/">Homepage</Link>
+      <Link className="nav-item" to="/blogs">Blogs</Link>
 
       {user ? (
         // Links for protected routes only for logged in users
@@ -42,12 +42,9 @@ function Navbar({ user, setUser, admin, setAdmin }) {
 
           <span className="nav-item">admin: {admin.role}</span>
 
-          <button className="nav-item" onClick={logOut}>
-            Log Out
-          </button>
+          <button className="nav-item" onClick={logOut}>Log Out</button>
         </>
       ) : (
-        // links for not logged in users
         <>
           <Link className="nav-item" to="/sign-up">
             Sign up
@@ -57,7 +54,7 @@ function Navbar({ user, setUser, admin, setAdmin }) {
           </Link>
         </>
       )}
-    </div>
+    </nav>
   );
 }
 
