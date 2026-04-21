@@ -40,7 +40,7 @@ function Navbar({ user, setUser, admin, setAdmin }) {
             Dashboard
           </Link>
 
-          <span className="nav-item">{admin.role}</span>
+          <span className="nav-item">admin: {admin.role}</span>
 
           <button className="nav-item" onClick={logOut}>Log Out</button>
         </>
