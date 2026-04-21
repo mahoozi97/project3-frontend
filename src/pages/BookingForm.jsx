@@ -38,7 +38,6 @@ export const BookingForm = () => {
             {error.message}
           </p>
         ))}
-
         <label>
           Name:
           <input
@@ -46,25 +45,17 @@ export const BookingForm = () => {
             {...register("name", { required: "Name is required" })}
           />
         </label>
-
         <br /> <br />
-
         <label>
           CPR:
           <input
-            type="text"
+            type="number"
             {...register("cpr", {
               required: "CPR is required",
-              pattern: {
-                value: /^[0-9]+$/,
-                message: "CPR must be numbers only",
-              },
             })}
           />
         </label>
-
         <br /> <br />
-
         <label>
           Destination:
           <input
@@ -74,9 +65,7 @@ export const BookingForm = () => {
             })}
           />
         </label>
-
         <br /> <br />
-
         <label>
           Mobile No.:
           <input
@@ -84,9 +73,7 @@ export const BookingForm = () => {
             {...register("phoneNumber", { required: "Mobile No. is required" })}
           />
         </label>
-
         <br /> <br />
-
         <label>
           Date:
           <input
@@ -95,9 +82,7 @@ export const BookingForm = () => {
             {...register("date", { required: "Select date and time" })}
           />
         </label>
-
         <br /> <br />
-
         <label>
           Driver:
           <select {...register("driver", { required: "Select driver" })}>
@@ -109,9 +94,7 @@ export const BookingForm = () => {
             ))}
           </select>
         </label>
-
         <br /> <br />
-
         <Button htmlType="submit">Book</Button>
       </form>
     </>
