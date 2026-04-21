@@ -24,15 +24,12 @@ function App() {
     const token = localStorage.getItem("token");
     if (token) {
       try {
-        // Decoding the JWT payload
-        const userInfo = JSON.parse(atob(token.split(".")[1]));
-        // Note: Check if your payload is nested under .payload or directly in the object
-        const actualUser = userInfo.payload || userInfo; 
-        setUser(actualUser);
-        
-        // If your token logic includes role-based info, set admin here
-        if (actualUser.role === "admin") {
-          setAdmin(actualUser);
+        const userInfo = JSON.parse(atob(token.split(".")[1])).payload;
+
+        if (userInfo.role === "admin") {
+          setAdmin(userInfo);
+        } else if (userInfo.role === "user") {
+          setUser(userInfo);
         }
       } catch (err) {
         console.error("Invalid token:", err);
@@ -44,7 +41,14 @@ function App() {
 
   if (isToken) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
         <Spin description="Loading" size="large" />
       </div>
     );
@@ -58,7 +62,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/blogs" element={<Home />} />
         <Route path="/blog/:id" element={<BlogDetail user={user} />} />
-        
+
         <Route
           path="/sign-up"
           element={!user ? <SignUp /> : <Navigate to="/dashboard" />}
@@ -84,7 +88,11 @@ function App() {
         <Route
           path="/admin-dashboard"
           element={
-            admin ? <AdminDashboard admin={admin} /> : <Navigate to="/sign-in" />
+            admin ? (
+              <AdminDashboard admin={admin} />
+            ) : (
+              <Navigate to="/sign-in" />
+            )
           }
         />
         {/* Blog Management Routes */}
@@ -96,7 +104,6 @@ function App() {
           path="/admin/blogs/edit/:id"
           element={admin ? <BlogForm /> : <Navigate to="/sign-in" />}
         />
-
       </Routes>
     </div>
   );
