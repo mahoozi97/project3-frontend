@@ -41,6 +41,23 @@ const deleteBooking = async (token, id) => {
   });
 };
 
+const toggleStatus = async (token, id, btn) => {
+  const status = null;
+  if (btn === "rejected") {
+    status = "Rejected ❌";
+  } else if (btn === "accepted") {
+    status = "Accepted ✅";
+  }
+
+  await axios.put(
+    `${BASE_URL}/booking/${id}`,
+    { status },
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    },
+  );
+};
+
 export {
   newBooking,
   getAllBooking,
@@ -48,4 +65,5 @@ export {
   getBookingById,
   editBooking,
   deleteBooking,
+  toggleStatus,
 };
