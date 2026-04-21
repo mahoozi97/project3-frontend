@@ -11,10 +11,6 @@ function SignIn({ setUser, setAdmin }) {
 
   const navigate = useNavigate();
 
-  const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-  };
-
   const handleSubmit = async (event) => {
   event.preventDefault();
 
@@ -45,6 +41,10 @@ function SignIn({ setUser, setAdmin }) {
     );
   }
 };
+
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
 
   return (
     <div>
