@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
-import { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import {
   deleteBooking,
-  getAllBookingByUserId,
-} from "../services/bookingService";
+  editBooking,
+  getAllBooking,
+} from "../../services/bookingService";
 import { Button, Spin } from "antd";
 import { Link } from "react-router";
 
-function Dashboard({ user }) {
+export const AllBooking = ({ admin }) => {
   const [booking, setBooking] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const fetchBooking = async () => {
+  const fetchAllBooking = async () => {
     try {
       const token = localStorage.getItem("token");
-      const booking = await getAllBookingByUserId(token);
+      const booking = await getAllBooking(token);
       setBooking(booking);
     } catch (error) {
       console.log("Error:", error.response?.data?.error || error.message);
@@ -39,7 +39,22 @@ function Dashboard({ user }) {
     try {
       const token = localStorage.getItem("token");
       await deleteBooking(token, id);
-      fetchBooking();
+      fetchAllBooking();
+    } catch (error) {
+      console.log("Error:", error.response?.data?.error || error.message);
+      setErrorMessage(error.response?.data?.error || error.message);
+    }
+  };
+
+  const toggleStatus = async (id, btn) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (btn === "reject") {
+        await editBooking(token, id, { status: "Rejected ❌" });
+      } else if (btn === "accept") {
+        await editBooking(token, id, { status: "Accepted ✅" });
+      }
+      fetchAllBooking();
     } catch (error) {
       console.log("Error:", error.response?.data?.error || error.message);
       setErrorMessage(error.response?.data?.error || error.message);
@@ -47,7 +62,7 @@ function Dashboard({ user }) {
   };
 
   useEffect(() => {
-    fetchBooking();
+    fetchAllBooking();
   }, []);
   return (
     <div>
@@ -73,9 +88,17 @@ function Dashboard({ user }) {
             <p>Driver: {book.driver}</p>
             <p>Status: {book.status}</p>
 
-            <Button>
-              <Link to={""}>Edit</Link>
-            </Button>
+            {book.status === "Pending ⏳" || book.status === "Rejected ❌" ? (
+              <Button onClick={() => toggleStatus(book._id, "accept")}>
+                Accept ✅
+              </Button>
+            ) : book.status === "Accepted ✅" ? (
+              <Button onClick={() => toggleStatus(book._id, "reject")}>
+                Reject ❌
+              </Button>
+            ) : (
+              <h1></h1>
+            )}
 
             <Button
               color="danger"
@@ -90,6 +113,6 @@ function Dashboard({ user }) {
       )}
     </div>
   );
-}
+};
 
-export default Dashboard;
+export default AllBooking;

@@ -14,6 +14,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import BlogDetail from "./pages/BlogDetail";
 import BlogForm from "./pages/admin/BlogForm";
+import AllBooking from "./pages/admin/AllBooking";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -95,6 +96,18 @@ function App() {
             )
           }
         />
+
+        <Route
+          path="/admin-bookings"
+          element={
+            admin ? (
+              <AllBooking admin={admin} />
+            ) : (
+              <Navigate to="/sign-in" />
+            )
+          }
+        />
+
         {/* Blog Management Routes */}
         <Route
           path="/admin/blogs/create"
