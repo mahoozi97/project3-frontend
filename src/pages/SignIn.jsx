@@ -83,5 +83,5 @@ function SignIn({ setUser, setAdmin }) {
     </div>
   );
 }
-
+// The SignIn component provides a form for users to enter their username and password.
 export default SignIn;
