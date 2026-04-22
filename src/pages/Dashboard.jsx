@@ -35,17 +35,6 @@ function Dashboard({ user }) {
     });
   };
 
-  const cancelBooking = async (id) => {
-    try {
-      const token = localStorage.getItem("token");
-      await deleteBooking(token, id);
-      fetchBooking();
-    } catch (error) {
-      console.log("Error:", error.response?.data?.error || error.message);
-      setErrorMessage(error.response?.data?.error || error.message);
-    }
-  };
-
   useEffect(() => {
     fetchBooking();
   }, []);
@@ -75,14 +64,6 @@ function Dashboard({ user }) {
 
             <Button>
               <Link to={""}>Edit</Link>
-            </Button>
-
-            <Button
-              color="danger"
-              variant="solid"
-              onClick={() => cancelBooking(book._id)}
-            >
-              Cancel
             </Button>
             <hr />
           </div>
