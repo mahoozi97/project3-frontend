@@ -8,7 +8,7 @@ function Homepage() {
     <div>
       <br />
       <h1 className='homepage'>Welcome to KhalijiGo</h1>
-      <p>استمتع بتجربة مميزة مع خدماتنا</p>
+      <h2>استمتع بتجربة مميزة مع خدماتنا</h2>
 
       <br /> <br />
       <img src={bookNowImg} alt="Book Now" />
@@ -18,6 +18,7 @@ function Homepage() {
       <img src={readMoreImg} alt="Read More" />
       <br /> <br />
       <Link to="/blogs"><button className='btn'>Read more</button></Link>
+      <br /> <br /> <br /> <br /> <br />
     </div>  
   )
 }
