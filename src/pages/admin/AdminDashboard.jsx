@@ -26,38 +26,41 @@ const AdminDashboard = () => {
     }
   };
 
-    useEffect(() => {
+  useEffect(() => {
     loadBlogs();
   }, []);
 
   return (
     <div className="mx-2.5 flex flex-col gap-1.5 mb-2 mt-4">
+      <div
+        className="flex items-center justify-between px-2 py-1"
+        style={{
+          background:
+            "linear-gradient(180deg,#1c74d4 0%,#1560c0 40%,#1458b8 100%)",
+          borderBottom: "1px solid #1a3a6a",
+        }}
+      >
+        <span className="text-white font-bold text-sm">Admin Dashboard</span>
+        <div className="flex gap-1">
+          {["─", "□", "✕"].map((s, i) => (
+            <button
+              key={i}
+              className="w-5 h-5 text-white text-[11px] flex items-center justify-center"
+              style={{
+                border: "1px outset #7a9ac8",
+                background: "linear-gradient(180deg,#4a7ab5,#2a5a95)",
+              }}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <div
-          className="flex items-center justify-between px-2 py-1"
-          style={{
-            background: "linear-gradient(180deg, #0a246a, #3a6ea5)",
-            borderBottom: "1px solid #1a3a6a",
-          }}
-        >
-          <span className="text-white font-bold text-sm">Admin Dashboard</span>
-          <div className="flex gap-1">
-            {["─", "□", "✕"].map((s, i) => (
-              <button
-                key={i}
-                className="w-5 h-5 text-white text-[11px] flex items-center justify-center"
-                style={{
-                  border: "1px outset #7a9ac8",
-                  background: "linear-gradient(180deg,#4a7ab5,#2a5a95)",
-                }}
-              >
-                {s}
-              </button>
-            ))}
-          </div>
-        </div>
-
-      <div className="bg-white px-3 py-2" style={{ border: "2px outset #d4d0c8" }}>
+        className="bg-white px-3 py-2"
+        style={{ border: "2px outset #d4d0c8" }}
+      >
         <Link to="/admin/blogs/create">
           <XPButton primary>+ Create New Blog Post</XPButton>
         </Link>

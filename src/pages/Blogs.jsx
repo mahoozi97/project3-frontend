@@ -25,11 +25,11 @@ const Blogs = () => {
         className="bg-[#ece9d8] w-200"
         style={{ border: "2px outset #d4d0c8" }}
       >
-
         <div
           className="flex items-center justify-between px-2 py-1"
           style={{
-            background: "linear-gradient(180deg, #0a246a, #3a6ea5)",
+            background:
+              "linear-gradient(180deg,#1c74d4 0%,#1560c0 40%,#1458b8 100%)",
             borderBottom: "1px solid #1a3a6a",
           }}
         >
@@ -51,7 +51,6 @@ const Blogs = () => {
         </div>
 
         <div className="flex flex-col items-center px-8 py-6 gap-4">
-
           <h1
             className="text-[22px] font-bold text-[#0a246a] text-center"
             style={{ textShadow: "1px 1px 0 #fff" }}
@@ -91,7 +90,10 @@ const Blogs = () => {
                     {blog.description.substring(0, 100)}...
                   </p>
 
-                  <div className="w-full" style={{ borderTop: "1px inset #d4d0c8" }} />
+                  <div
+                    className="w-full"
+                    style={{ borderTop: "1px inset #d4d0c8" }}
+                  />
 
                   <div className="flex justify-end">
                     <Link to={`/blog/${blog._id}`}>

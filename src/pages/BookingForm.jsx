@@ -50,7 +50,8 @@ export const BookingForm = () => {
       <div
         className="flex items-center justify-between px-2 py-1"
         style={{
-          background: "linear-gradient(180deg, #0a246a, #3a6ea5)",
+          background:
+            "linear-gradient(180deg,#1c74d4 0%,#1560c0 40%,#1458b8 100%)",
           borderBottom: "1px solid #1a3a6a",
         }}
       >

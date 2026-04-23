@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getBlogById, addComment, deleteComment } from "../services/blogService";
+import {
+  getBlogById,
+  addComment,
+  deleteComment,
+} from "../services/blogService";
 import { Spin } from "antd";
 import { XPButton, XPInput } from "../components/XPControls";
 
@@ -67,11 +71,11 @@ const BlogDetail = () => {
         className="bg-[#ece9d8] w-200"
         style={{ border: "2px outset #d4d0c8" }}
       >
-
         <div
           className="flex items-center justify-between px-2 py-1"
           style={{
-            background: "linear-gradient(180deg, #0a246a, #3a6ea5)",
+            background:
+              "linear-gradient(180deg,#1c74d4 0%,#1560c0 40%,#1458b8 100%)",
             borderBottom: "1px solid #1a3a6a",
           }}
         >
@@ -93,7 +97,6 @@ const BlogDetail = () => {
         </div>
 
         <div className="flex flex-col items-center px-8 py-6 gap-4">
-
           <h1
             className="text-[22px] font-bold text-[#0a246a] text-center"
             style={{ textShadow: "1px 1px 0 #fff" }}
@@ -132,7 +135,8 @@ const BlogDetail = () => {
               >
                 <div className="flex gap-2 text-[13px]">
                   <strong className="text-[#0a246a]">
-                    {comment.userId?.username || comment.userId?.name || "User"}:
+                    {comment.userId?.username || comment.userId?.name || "User"}
+                    :
                   </strong>
                   <span className="text-[#444]">{comment.text}</span>
                 </div>
@@ -161,10 +165,15 @@ const BlogDetail = () => {
               </div>
 
               <div className="p-3">
-                <form onSubmit={handleAddComment} className="flex flex-col gap-3">
+                <form
+                  onSubmit={handleAddComment}
+                  className="flex flex-col gap-3"
+                >
                   <div className="flex items-center gap-4 flex-wrap justify-center">
                     <div className="flex items-center flex-1 min-w-50 justify-center">
-                      <span className="text-[12px] font-bold w-14">Commet:</span>
+                      <span className="text-[12px] font-bold w-14">
+                        Commet:
+                      </span>
                       <XPInput
                         type="text"
                         className="flex-1 max-w-60"
@@ -177,7 +186,11 @@ const BlogDetail = () => {
                   </div>
 
                   <div className="flex justify-end mt-2 pt-2 border-t border-black/10">
-                    <XPButton primary type="submit" className="py-1.5 px-6 text-sm">
+                    <XPButton
+                      primary
+                      type="submit"
+                      className="py-1.5 px-6 text-sm"
+                    >
                       Post Comment ➔
                     </XPButton>
                   </div>
@@ -189,7 +202,6 @@ const BlogDetail = () => {
               Please log in to add a comment.
             </p>
           )}
-
         </div>
       </div>
     </div>

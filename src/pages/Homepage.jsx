@@ -6,16 +6,15 @@ import readMoreImg from "../assets/Read More.png";
 function Homepage() {
   return (
     <div className="min-h-screen bg-[#3a6ea5] flex flex-col items-center pt-8 pb-8">
-      
       <div
         className="bg-[#ece9d8] w-200"
         style={{ border: "2px outset #d4d0c8" }}
       >
-
         <div
           className="flex items-center justify-between px-2 py-1"
           style={{
-            background: "linear-gradient(180deg, #0a246a, #3a6ea5)",
+            background:
+              "linear-gradient(180deg,#1c74d4 0%,#1560c0 40%,#1458b8 100%)",
             borderBottom: "1px solid #1a3a6a",
           }}
         >
