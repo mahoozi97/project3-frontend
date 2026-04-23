@@ -2,12 +2,27 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { getBlogById, addComment, deleteComment } from '../services/blogService'
 
+// FIX: decode the userId from the stored JWT token.
+// The old code did localStorage.getItem('userId'), but nothing in the app
+// ever writes 'userId' to localStorage — only 'token' is stored.
+// This meant currentUserId was always null: the delete button never appeared
+// and logged-in users always saw "Please log in to add a comment."
+const getTokenUserId = () => {
+  const token = localStorage.getItem('token')
+  if (!token) return null
+  try {
+    return JSON.parse(atob(token.split('.')[1])).payload._id
+  } catch {
+    return null
+  }
+}
+
 const BlogDetail = () => {
   const { id } = useParams()
   const [blog, setBlog] = useState(null)
   const [commentText, setCommentText] = useState('')
 
-  const currentUserId = localStorage.getItem('userId')
+  const currentUserId = getTokenUserId()
 
   useEffect(() => {
     loadBlog()
@@ -25,7 +40,7 @@ const BlogDetail = () => {
   const handleAddComment = async (e) => {
     e.preventDefault()
     try {
-      // FIX: don't send userId from client — backend reads it from the token
+      // Don't send userId from the client — the backend reads it from the token
       await addComment(id, { text: commentText })
       setCommentText('')
       loadBlog()
@@ -57,12 +72,13 @@ const BlogDetail = () => {
       <h3>Comments</h3>
       {blog.comments.map((comment) => (
         <div key={comment._id} className='comment'>
-          <strong>{comment.userId?.name || "User"}</strong>
-          <span>{comment.text}</span>
+          {/* Fall back to 'username' since that's the field in User.js */}
+          <strong>{comment.userId?.username || comment.userId?.name || "User"}</strong>
+          <span> {comment.text}</span>
 
-          {/* FIX: .toString() needed because after populate, comment.userId._id
-              is a Mongoose ObjectId, not a plain string */}
-          {comment.userId?._id?.toString() === currentUserId && (
+          {/* .toString() needed: after populate, comment.userId._id is a
+              Mongoose ObjectId, not a plain string */}
+          {currentUserId && comment.userId?._id?.toString() === currentUserId && (
             <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>
           )}
         </div>

@@ -1,7 +1,5 @@
 import axios from "axios";
 
-// FIX: was hardcoded "http://localhost:5000/api/blogs" — now uses the env variable
-// to be consistent with authService and avoid port mismatch issues
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api/blogs`;
 
 const authHeader = () => {
@@ -18,6 +16,8 @@ export const updateBlog = (id, blogData) =>
 export const deleteBlog = (id) =>
   axios.delete(`${API_URL}/${id}`, authHeader());
 
+// FIX: added authHeader() to both comment calls — the backend routes now
+// require a token (verifyToken middleware), so requests without it return 401
 export const addComment = (blogId, commentData) =>
   axios.post(`${API_URL}/${blogId}/comments`, commentData, authHeader());
 export const deleteComment = (blogId, commentId) =>
