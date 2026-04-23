@@ -47,7 +47,7 @@ export const BookingForm = () => {
       className="flex1 justify-end max-w-200 ml-50 mt-4"
       style={{ background: "#ece9d8", border: "2px inset #808080" }}
     >
-      {/* Title Bar */}
+
       <div
         className="text-white font-bold text-[13px] px-2 py-1"
         style={{ background: "linear-gradient(90deg,#1458b8,#3a7bd5)" }}
@@ -56,7 +56,7 @@ export const BookingForm = () => {
       </div>
 
       <div className="p-3">
-        {/* Error Handling */}
+
         {(errorMessage || Object.keys(errors).length > 0) && (
           <div className="bg-[#fff0f0] border border-red-400 p-2 mb-3 text-[13px] text-red-700">
             {errorMessage && <div>• {errorMessage}</div>}
@@ -67,7 +67,7 @@ export const BookingForm = () => {
         )}
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-          {/* Row 1: Name & CPR */}
+
           <div className="flex items-center gap-4 flex-wrap justify-center">
             <div className="flex items-center flex-1 min-w-50 justify-center">
               <span className="text-[12px] font-bold w-14">Name:</span>
@@ -93,7 +93,6 @@ export const BookingForm = () => {
             </div>
           </div>
 
-          {/* Row 2: Destination & Mobile */}
           <div className="flex items-center gap-4 flex-wrap justify-center">
             <div className="flex items-center flex-1 min-w-50 justify-center">
               <span className="text-[12px] font-bold w-14">To:</span>
@@ -121,7 +120,6 @@ export const BookingForm = () => {
             </div>
           </div>
 
-          {/* Row 3: Date & Driver */}
           <div className="flex items-center gap-4 flex-wrap justify-center">
             <div className="flex items-center flex-1 min-w-50 justify-center">
               <span className="text-[12px] font-bold w-14">Date:</span>
@@ -148,7 +146,6 @@ export const BookingForm = () => {
             </div>
           </div>
 
-          {/* Action Row */}
           <div className="flex justify-end mt-2 pt-2 border-t border-black/10">
             <XPButton primary type="submit" className="py-1.5 px-6 text-sm">
               Confirm Booking ➔
