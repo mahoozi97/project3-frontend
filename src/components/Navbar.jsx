@@ -59,9 +59,6 @@ function Navbar({ user, setUser, admin, setAdmin }) {
         ) : admin ? (
           // Links for admins
           <>
-            <NavLink className={navItemClass} to="/blogs">
-              Blogs
-            </NavLink>
             <NavLink className={navItemClass} to="/admin-dashboard">
               Dashboard
             </NavLink>
