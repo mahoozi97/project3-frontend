@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { XPButton, XPInput } from "../components/XPControls";
 
 function SignIn({ setUser, setAdmin }) {
   const [formData, setFormData] = useState({
@@ -10,6 +11,10 @@ function SignIn({ setUser, setAdmin }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,13 +28,12 @@ function SignIn({ setUser, setAdmin }) {
       localStorage.setItem("token", token);
 
       const userInfo = JSON.parse(atob(token.split(".")[1])).payload;
-
-      if (userInfo.role === "admin") {
-        setAdmin(userInfo);
-        navigate("/admin-dashboard");
-      } else if (userInfo.role === "user") {
+      if (userInfo.role === "user") {
         setUser(userInfo);
         navigate("/dashboard");
+      } else {
+        setAdmin(userInfo);
+        navigate("/admin-dashboard");
       }
     } catch (err) {
       setErrorMessage(
@@ -38,43 +42,77 @@ function SignIn({ setUser, setAdmin }) {
     }
   };
 
-  const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-  };
-
   return (
-    <div>
-      <h1>Sign In</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            id="username"
-            name="username"
-            type="text"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
+    <div
+      className="flex1 justify-end mx-10 mb-2 mt-4 max-w-100"
+      style={{ background: "#ece9d8", border: "2px inset #808080" }}
+    >
+      <div
+        className="flex items-center justify-between px-2 py-1"
+        style={{
+          background:
+            "linear-gradient(180deg,#1c74d4 0%,#1560c0 40%,#1458b8 100%)",
+          borderBottom: "1px solid #1a3a6a",
+        }}
+      >
+        <span className="text-white font-bold text-sm">Sign In</span>
+        <div className="flex gap-1">
+          {["─", "□", "✕"].map((s, i) => (
+            <button
+              key={i}
+              className="w-5 h-5 text-white text-[11px] flex items-center justify-center"
+              style={{
+                border: "1px outset #7a9ac8",
+                background: "linear-gradient(180deg,#4a7ab5,#2a5a95)",
+              }}
+            >
+              {s}
+            </button>
+          ))}
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">Sign In</button>
-      </form>
-      {errorMessage && (
-        <p style={{ color: "red" }} role="alert">
-          {errorMessage}
-        </p>
-      )}
+      </div>
+
+      <div className="p-3">
+        {errorMessage && (
+          <p
+            className="flex justify-center mb-3"
+            style={{ color: "red" }}
+            role="alert"
+          >
+            {errorMessage}
+          </p>
+        )}
+        <form onSubmit={handleSubmit}>
+          <div className="flex items-center flex-1 min-w-50 justify-center">
+            <span className="text-[14px] font-bold w-20">Username:</span>
+            <XPInput
+              type="text"
+              className="flex-1 max-w-60"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="flex items-center flex-1 min-w-50 justify-center mt-3">
+            <span className="text-[14px] font-bold w-20">Password:</span>
+            <XPInput
+              type="password"
+              className="flex-1 max-w-60"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="flex justify-center mt-2 pt-2 border-t border-black/10">
+            <XPButton primary type="submit" className="py-1.5 px-6 text-sm">
+              Sign In ➔
+            </XPButton>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

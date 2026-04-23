@@ -15,6 +15,8 @@ import Blogs from "./pages/Blogs";
 import BlogDetail from "./pages/BlogDetail";
 import BlogForm from "./pages/admin/BlogForm";
 import AllBooking from "./pages/admin/AllBooking";
+import { Splash } from "./components/Splash";
+import { StartUp } from "./components/StartUp";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -60,7 +62,9 @@ function App() {
       <Navbar user={user} setUser={setUser} admin={admin} setAdmin={setAdmin} />
       <Routes>
         {/* --- Public Routes --- */}
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<Splash />} />
+        <Route path="/start-up" element={<StartUp />} />
+        <Route path="/homepage" element={<Homepage />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog/:id" element={<BlogDetail user={user} />} />
 
