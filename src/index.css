@@ -1,4 +1,12 @@
-:root {
+@import "tailwindcss";
+/* Chrome, Safari, Edge, and Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* :root {
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -30,12 +38,7 @@
   }
 }
 
-/* Chrome, Safari, Edge, and Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -119,4 +122,4 @@ code {
 
 .nav-item {
   margin-right: 10px;
-}
+} */
