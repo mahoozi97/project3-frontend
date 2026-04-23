@@ -6,6 +6,7 @@ import {
 } from "../../services/bookingService";
 import { Button, Spin } from "antd";
 import { Link } from "react-router";
+import { BookingCard } from "../../components/BookingCard";
 
 export const AllBooking = ({ admin }) => {
   const [booking, setBooking] = useState(null);
@@ -65,51 +66,56 @@ export const AllBooking = ({ admin }) => {
     fetchAllBooking();
   }, []);
   return (
-    <div>
-      <h1>Booking</h1>
+    <div className="mx-2.5 flex flex-col gap-1.5 mb-2 mt-4">
+      {/* Header */}
+      <div
+        className="text-white font-bold text-[15px] px-2 py-1"
+        style={{ background: "#1458b8" }}
+      >
+        📅 All Bookings
+      </div>
 
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+      {/* Error Message */}
+      {errorMessage && (
+        <div className="bg-red-100 text-red-700 px-3 py-1 text-xs font-bold border border-red-400">
+          {errorMessage}
+        </div>
+      )}
 
+      {/* Loading State */}
       {!booking ? (
-        <Spin
-          style={{ marginTop: "20px" }}
-          description="Loading"
-          size="large"
-        />
+        <div
+          className="bg-white px-3 py-4 text-center"
+          style={{ border: "2px outset #d4d0c8" }}
+        >
+          <Spin description="Loading bookings..." size="large" />
+        </div>
       ) : booking.length === 0 ? (
-        <p>No bookings found!</p>
+        /* Empty State */
+        <div
+          className="bg-white px-3 py-2 text-xs"
+          style={{ border: "2px outset #d4d0c8" }}
+        >
+          No bookings found!
+        </div>
       ) : (
+        /* Booking List */
         booking.map((book) => (
           <div key={book._id}>
-            <p>Name: {book.name}</p>
-            <p>CPR: {book.cpr}</p>
-            <p>Destination: {book.destination}</p>
-            <p>Date: {formatDate(book.date)}</p>
-            <p>Driver: {book.driver}</p>
-            <p>Status: {book.status}</p>
-
-            {book.status === "Pending ⏳" || book.status === "Rejected ❌" ? (
-              <Button onClick={() => toggleStatus(book._id, "accept")}>
-                Accept ✅
-              </Button>
-            ) : book.status === "Accepted ✅" ? (
-              <Button onClick={() => toggleStatus(book._id, "cancel")}>
-                Cancel ❌
-              </Button>
-            ) : (
-              <h1></h1>
-            )}
-
-            {book.status !== "Cancelled ❌" ? (
-              <Button
-                color="danger"
-                variant="solid"
-                onClick={() => handelDeleteBooking(book._id)}
-              >
-                Delete
-              </Button>
-            ) : null}
-            <hr />
+            <BookingCard
+              admin={admin}
+              id={book._id}
+              name={book.name}
+              cpr={book.cpr}
+              destination={book.destination}
+              date={book.date}
+              phoneNumber={book.phoneNumber}
+              driver={book.driver}
+              status={book.status}
+              formatDate={formatDate}
+              handelDeleteBooking={handelDeleteBooking}
+              toggleStatus={toggleStatus}
+            />
           </div>
         ))
       )}
