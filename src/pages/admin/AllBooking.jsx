@@ -67,7 +67,7 @@ export const AllBooking = ({ admin }) => {
   }, []);
   return (
     <div className="mx-2.5 flex flex-col gap-1.5 mb-2 mt-4">
-      {/* Header */}
+      
       <div
         className="text-white font-bold text-[15px] px-2 py-1"
         style={{ background: "#1458b8" }}
@@ -75,14 +75,12 @@ export const AllBooking = ({ admin }) => {
         📅 All Bookings
       </div>
 
-      {/* Error Message */}
       {errorMessage && (
         <div className="bg-red-100 text-red-700 px-3 py-1 text-xs font-bold border border-red-400">
           {errorMessage}
         </div>
       )}
 
-      {/* Loading State */}
       {!booking ? (
         <div
           className="bg-white px-3 py-4 text-center"
@@ -91,7 +89,7 @@ export const AllBooking = ({ admin }) => {
           <Spin description="Loading bookings..." size="large" />
         </div>
       ) : booking.length === 0 ? (
-        /* Empty State */
+
         <div
           className="bg-white px-3 py-2 text-xs"
           style={{ border: "2px outset #d4d0c8" }}
@@ -99,7 +97,7 @@ export const AllBooking = ({ admin }) => {
           No bookings found!
         </div>
       ) : (
-        /* Booking List */
+
         booking.map((book) => (
           <div key={book._id}>
             <BookingCard
