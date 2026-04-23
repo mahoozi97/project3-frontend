@@ -82,14 +82,14 @@ export const BookingCard = ({
           <>
             {status === "Pending ⏳" || status === "Rejected ❌" ? (
               <button
-                className="text-center font-bold text-[13px] px-2 py-0.5 bg-white text-green-500 cursor-pointer hover:bg-red-50 active:bg-red-200"
+                className="text-center font-bold text-[13px] px-2 py-0.5 bg-green-100 text-green-500 cursor-pointer hover:bg-green-200 active:bg-green-300"
                 onClick={() => toggleStatus(id, "accept")}
               >
                 Accept ✅
               </button>
             ) : status === "Accepted ✅" ? (
               <button
-                className="text-center font-bold text-[13px] px-2 py-0.5 bg-red-100 text-red-900 cursor-pointer hover:bg-red-50 active:bg-red-200"
+                className="text-center font-bold text-[13px] px-2 py-0.5 bg-orange-100 text-orange-700 cursor-pointer hover:bg-orange-200 active:bg-orange-300"
                 onClick={() => toggleStatus(id, "cancel")}
               >
                 Cancel ❌

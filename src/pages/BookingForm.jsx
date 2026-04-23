@@ -47,16 +47,31 @@ export const BookingForm = () => {
       className="flex1 justify-end max-w-200 ml-50 mt-4"
       style={{ background: "#ece9d8", border: "2px inset #808080" }}
     >
-
       <div
-        className="text-white font-bold text-[13px] px-2 py-1"
-        style={{ background: "linear-gradient(90deg,#1458b8,#3a7bd5)" }}
+        className="flex items-center justify-between px-2 py-1"
+        style={{
+          background: "linear-gradient(180deg, #0a246a, #3a6ea5)",
+          borderBottom: "1px solid #1a3a6a",
+        }}
       >
-        🚕 Book Your Trip
+        <span className="text-white font-bold text-sm">🚕 Book Your Trip</span>
+        <div className="flex gap-1">
+          {["─", "□", "✕"].map((s, i) => (
+            <button
+              key={i}
+              className="w-5 h-5 text-white text-[11px] flex items-center justify-center"
+              style={{
+                border: "1px outset #7a9ac8",
+                background: "linear-gradient(180deg,#4a7ab5,#2a5a95)",
+              }}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="p-3">
-
         {(errorMessage || Object.keys(errors).length > 0) && (
           <div className="bg-[#fff0f0] border border-red-400 p-2 mb-3 text-[13px] text-red-700">
             {errorMessage && <div>• {errorMessage}</div>}
@@ -67,7 +82,6 @@ export const BookingForm = () => {
         )}
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-
           <div className="flex items-center gap-4 flex-wrap justify-center">
             <div className="flex items-center flex-1 min-w-50 justify-center">
               <span className="text-[12px] font-bold w-14">Name:</span>
