@@ -11,7 +11,7 @@ import { Spin } from "antd";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
 // Blog Imports
-import Home from "./pages/Home";
+import Blogs from "./pages/Blogs";
 import BlogDetail from "./pages/BlogDetail";
 import BlogForm from "./pages/admin/BlogForm";
 import AllBooking from "./pages/admin/AllBooking";
@@ -61,7 +61,7 @@ function App() {
       <Routes>
         {/* --- Public Routes --- */}
         <Route path="/" element={<Homepage />} />
-        <Route path="/blogs" element={<Home />} />
+        <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog/:id" element={<BlogDetail user={user} />} />
 
         <Route
@@ -100,11 +100,7 @@ function App() {
         <Route
           path="/admin-bookings"
           element={
-            admin ? (
-              <AllBooking admin={admin} />
-            ) : (
-              <Navigate to="/sign-in" />
-            )
+            admin ? <AllBooking admin={admin} /> : <Navigate to="/sign-in" />
           }
         />
 
