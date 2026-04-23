@@ -35,7 +35,7 @@ export const AllBooking = ({ admin }) => {
     });
   };
 
-  const cancelBooking = async (id) => {
+  const handelDeleteBooking = async (id) => {
     try {
       const token = localStorage.getItem("token");
       await deleteBooking(token, id);
@@ -49,8 +49,8 @@ export const AllBooking = ({ admin }) => {
   const toggleStatus = async (id, btn) => {
     try {
       const token = localStorage.getItem("token");
-      if (btn === "reject") {
-        await editBooking(token, id, { status: "Rejected ❌" });
+      if (btn === "cancel") {
+        await editBooking(token, id, { status: "Cancelled ❌" });
       } else if (btn === "accept") {
         await editBooking(token, id, { status: "Accepted ✅" });
       }
@@ -93,20 +93,22 @@ export const AllBooking = ({ admin }) => {
                 Accept ✅
               </Button>
             ) : book.status === "Accepted ✅" ? (
-              <Button onClick={() => toggleStatus(book._id, "reject")}>
-                Reject ❌
+              <Button onClick={() => toggleStatus(book._id, "cancel")}>
+                Cancel ❌
               </Button>
             ) : (
               <h1></h1>
             )}
 
-            <Button
-              color="danger"
-              variant="solid"
-              onClick={() => cancelBooking(book._id)}
-            >
-              Cancel
-            </Button>
+            {book.status !== "Cancelled ❌" ? (
+              <Button
+                color="danger"
+                variant="solid"
+                onClick={() => handelDeleteBooking(book._id)}
+              >
+                Delete
+              </Button>
+            ) : null}
             <hr />
           </div>
         ))

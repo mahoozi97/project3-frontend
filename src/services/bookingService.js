@@ -41,14 +41,6 @@ const deleteBooking = async (token, id) => {
   });
 };
 
-// const toggleStatus = async (token, id, btn) => {
-//   if (btn === "reject") {
-//     editBooking(token, id, { status: "Rejected ❌" });
-//   } else if (btn === "accept") {
-//     editBooking(token, id, { status: "Accepted ✅" });
-//   }
-// };
-
 export {
   newBooking,
   getAllBooking,
