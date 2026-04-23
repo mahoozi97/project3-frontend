@@ -104,7 +104,7 @@ const BlogDetail = () => {
           <img
             src={blog.image}
             alt="Blog cover"
-            className="w-full max-h-64 object-cover"
+            className="w-full object-cover"
             style={{ border: "1px inset #d4d0c8" }}
           />
 
