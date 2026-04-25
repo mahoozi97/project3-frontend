@@ -1,8 +1,8 @@
-import { useState } from "react"; // Added for mobile toggle
+import { useState } from "react";
 import { NavLink, Link } from "react-router";
 
 function Navbar({ user, setUser, admin, setAdmin }) {
-  const [isOpen, setIsOpen] = useState(false); // State for mobile menu
+  const [isOpen, setIsOpen] = useState(false);
 
   function logOut() {
     localStorage.removeItem("token");
@@ -11,6 +11,7 @@ function Navbar({ user, setUser, admin, setAdmin }) {
     } else if (admin) {
       setAdmin(null);
     }
+    setIsOpen(false);
   }
 
   const navItemClass = ({ isActive }) =>
@@ -139,6 +140,7 @@ function Navbar({ user, setUser, admin, setAdmin }) {
               <Link
                 to="/sign-in"
                 className="text-[#ffcc44] hover:underline cursor-pointer no-underline"
+                onClick={() => setIsOpen(false)}
               >
                 Sign In
               </Link>
@@ -146,6 +148,7 @@ function Navbar({ user, setUser, admin, setAdmin }) {
               <Link
                 to="/sign-up"
                 className="text-[#ffcc44] hover:underline cursor-pointer no-underline"
+                onClick={() => setIsOpen(false)}
               >
                 Sign Up
               </Link>
