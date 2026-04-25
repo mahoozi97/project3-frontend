@@ -55,7 +55,7 @@ export const BookingForm = () => {
           borderBottom: "1px solid #1a3a6a",
         }}
       >
-        <span className="text-white font-bold text-sm">🚕 Book Your Trip</span>
+        <span className="text-white font-bold text-sm">🚕 Book Your Trip ⇒ One-way</span>
         <div className="flex gap-1">
           {["─", "□", "✕"].map((s, i) => (
             <button
