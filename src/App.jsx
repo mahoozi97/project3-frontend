@@ -17,6 +17,7 @@ import BlogForm from "./pages/admin/BlogForm";
 import AllBooking from "./pages/admin/AllBooking";
 import { Splash } from "./components/Splash";
 import { StartUp } from "./components/StartUp";
+import { Footer } from "./components/Footer";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -58,7 +59,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <Navbar user={user} setUser={setUser} admin={admin} setAdmin={setAdmin} />
       <Routes>
         {/* --- Public Routes --- */}
@@ -118,6 +119,8 @@ function App() {
           element={admin ? <BlogForm /> : <Navigate to="/sign-in" />}
         />
       </Routes>
+
+      <Footer />
     </div>
   );
 }
