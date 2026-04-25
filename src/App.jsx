@@ -19,6 +19,7 @@ import { Splash } from "./components/Splash";
 import { StartUp } from "./components/StartUp";
 import { Footer } from "./components/Footer";
 import { NotFound } from "./components/NotFound";
+import { AdminRoute } from "./components/AdminRoute";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -92,35 +93,23 @@ function App() {
         </Route>
 
         {/* --- Protected Admin Routes --- */}
-        <Route
-          path="/admin-dashboard"
-          element={
-            admin ? (
-              <AdminDashboard admin={admin} />
-            ) : (
-              <Navigate to="/sign-in" />
-            )
-          }
-        />
+        <Route element={<AdminRoute admin={admin} />}>
+          <Route
+            path="/admin-dashboard"
+            element={<AdminDashboard admin={admin} />}
+          />
 
-        <Route
-          path="/admin-bookings"
-          element={
-            admin ? <AllBooking admin={admin} /> : <Navigate to="/sign-in" />
-          }
-        />
+          <Route
+            path="/admin-bookings"
+            element={<AllBooking admin={admin} />}
+          />
 
-        {/* Blog Management Routes */}
-        <Route
-          path="/admin/blogs/create"
-          element={admin ? <BlogForm /> : <Navigate to="/sign-in" />}
-        />
-        <Route
-          path="/admin/blogs/edit/:id"
-          element={admin ? <BlogForm /> : <Navigate to="/sign-in" />}
-        />
+          <Route path="/admin/blogs/create" element={<BlogForm />} />
 
-        <Route path="*" element={<NotFound/>} />
+          <Route path="/admin/blogs/edit/:id" element={<BlogForm />} />
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <Footer />
