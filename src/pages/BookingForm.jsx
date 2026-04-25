@@ -44,7 +44,7 @@ export const BookingForm = () => {
 
   return (
     <div
-      className="flex1 justify-end max-w-200 ml-50 mt-4"
+      className="relative justify-end flex1  max-w-200 mt-4 mx-auto"
       style={{ background: "#ece9d8", border: "2px inset #808080" }}
     >
       <div

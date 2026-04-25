@@ -10,21 +10,26 @@ export const Splash = () => {
   return (
     <>
       {isLoading ? (
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-          }}
-        >
-          <img
-            src="src/assets/windowsXp.gif"
-            alt="Splash"
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
-        </div>
+        <div className="fixed inset-0 overflow-hidden">
+  <img
+    src="src/assets/windowsXp.gif"
+    alt="Splash"
+    className="w-full h-full object-fill block"
+  />
+</div>
       ) : (
         <Navigate to="/start-up" />
       )}
     </>
   );
 };
+
+{
+  /* <div className="fixed inset-0 overflow-hidden">
+  <img
+    src="src/assets/windowsXp.gif"
+    alt="Splash"
+    className="w-full h-full object-fill block"
+  />
+</div> */
+}

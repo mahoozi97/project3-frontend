@@ -5,7 +5,6 @@ export const StartUp = () => {
   return (
     <div
       style={{
-        position: "relative",
         backgroundImage: 'url("src/assets/wallpaper.jpg")',
         backgroundSize: "cover",
         width: "100%",

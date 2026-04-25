@@ -22,7 +22,7 @@ const Blogs = () => {
   return (
     <div className="min-h-screen bg-[#3a6ea5] flex flex-col items-center pt-8 pb-8">
       <div
-        className="bg-[#ece9d8] w-200"
+        className="bg-[#ece9d8] md:w-200 w-100"
         style={{ border: "2px outset #d4d0c8" }}
       >
         <div
