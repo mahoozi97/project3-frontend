@@ -23,7 +23,7 @@ export const Footer = () => {
           className="text-white font-bold text-xs"
           style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.5)" }}
         >
-          KhaleejiGo
+          KhalijiGo
         </span>
         <span
           className="text-[10px] text-white/50 ml-1"
