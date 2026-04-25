@@ -35,7 +35,6 @@ export const BookingCard = ({
       className="bg-white flex items-center gap-2 px-3 py-4 hover:bg-[#fffae8]"
       style={{ border: "2px outset #d4d0c8" }}
     >
-      {/* Icon (Replaced flag with a car/booking icon) */}
       <span className="text-2xl">{flag()}</span>
 
       {/* Main Details */}
@@ -49,9 +48,9 @@ export const BookingCard = ({
         </div>
       </div>
 
-      {/* Status Block (Replaces Price Block) */}
+      {/* Status */}
       <div
-        className="text-center px-3 py-1 min-w-20"
+        className="text-center px-3 py-1 min-w-30"
         style={
           status === "Pending ⏳"
             ? {
@@ -65,11 +64,17 @@ export const BookingCard = ({
                   border: "1px solid #40a040",
                   color: "#004000",
                 }
-              : {
-                  background: "linear-gradient(180deg, #f5e8e8, #e8c8c8)",
-                  border: "1px solid #a04040",
-                  color: "#400000",
-                }
+              : status === "Completed ✔️"
+                ? {
+                    background: "linear-gradient(180deg, #e8e8e8, #c8c8c8)",
+                    border: "1px solid #606060",
+                    color: "#202020",
+                  }
+                : {
+                    background: "linear-gradient(180deg, #f5e8e8, #e8c8c8)",
+                    border: "1px solid #a04040",
+                    color: "#400000",
+                  }
         }
       >
         <div className="font-bold text-sm capitalize">{status}</div>
@@ -80,23 +85,45 @@ export const BookingCard = ({
       <div className="flex flex-col gap-1 ml-2 min-w-17.5">
         {!admin ? null : (
           <>
-            {status === "Pending ⏳" || status === "Rejected ❌" ? (
-              <button
-                className="text-center font-bold text-[13px] px-2 py-0.5 bg-green-100 text-green-500 cursor-pointer hover:bg-green-200 active:bg-green-300"
-                onClick={() => toggleStatus(id, "accept")}
-              >
-                Accept ✅
-              </button>
+            {status === "Pending ⏳" ? (
+              <>
+                <button
+                  className="text-center font-bold text-[13px] px-2 py-0.5 bg-green-100 text-green-500 cursor-pointer hover:bg-green-200 active:bg-green-300"
+                  style={{ border: "2px outset #d4d0c8" }}
+                  onClick={() => toggleStatus(id, "accept")}
+                >
+                  Accept ✅
+                </button>
+
+                <button
+                  className="text-center font-bold text-[13px] px-2 py-0.5 bg-orange-100 text-orange-700 cursor-pointer hover:bg-orange-200 active:bg-orange-300"
+                  style={{ border: "2px outset #d4d0c8" }}
+                  onClick={() => toggleStatus(id, "cancel")}
+                >
+                  Cancel ❌
+                </button>
+              </>
             ) : status === "Accepted ✅" ? (
-              <button
-                className="text-center font-bold text-[13px] px-2 py-0.5 bg-orange-100 text-orange-700 cursor-pointer hover:bg-orange-200 active:bg-orange-300"
-                onClick={() => toggleStatus(id, "cancel")}
-              >
-                Cancel ❌
-              </button>
+              <>
+                <button
+                  className="text-center font-bold text-[13px] px-2 py-0.5 bg-gray-200 text-gray-700 cursor-pointer hover:bg-gray-300 active:bg-gray-400"
+                  style={{ border: "2px outset #d4d0c8" }}
+                  onClick={() => toggleStatus(id, "complete")}
+                >
+                  Completed ✔️
+                </button>
+
+                <button
+                  className="text-center font-bold text-[13px] px-2 py-0.5 bg-orange-100 text-orange-700 cursor-pointer hover:bg-orange-200 active:bg-orange-300"
+                  style={{ border: "2px outset #d4d0c8" }}
+                  onClick={() => toggleStatus(id, "cancel")}
+                >
+                  Cancel ❌
+                </button>
+              </>
             ) : null}
 
-            {status !== "Cancelled ❌" ? (
+            {status !== "Cancelled ❌" && status !== "Completed ✔️" ? (
               <button
                 onClick={() => handelDeleteBooking(id)}
                 className="text-center font-bold text-[13px] px-2 py-0.5 bg-red-100 text-red-900 cursor-pointer hover:bg-red-50 active:bg-red-200"

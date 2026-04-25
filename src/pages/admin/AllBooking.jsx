@@ -54,6 +54,8 @@ export const AllBooking = ({ admin }) => {
         await editBooking(token, id, { status: "Cancelled ❌" });
       } else if (btn === "accept") {
         await editBooking(token, id, { status: "Accepted ✅" });
+      } else if (btn === "complete") {
+        await editBooking(token, id, { status: "Completed ✔️" });
       }
       fetchAllBooking();
     } catch (error) {
