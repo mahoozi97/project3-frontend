@@ -58,7 +58,7 @@ export const BookingForm = () => {
           }}
         >
           <span className="text-white font-bold text-sm">
-            🚕 Book Your Trip ⇒ One-way
+            🚕 Book Your Trip
           </span>
           <div className="flex gap-1">
             {["─", "□", "✕"].map((s, i) => (
@@ -74,6 +74,30 @@ export const BookingForm = () => {
               </button>
             ))}
           </div>
+        </div>
+
+        {/* Menu Bar */}
+        <div
+          className="flex gap-0 px-1 py-0.5 text-[11px]"
+          style={{ background: "#d4d0c8", borderBottom: "1px solid #aca899" }}
+        >
+          <span
+            className="px-2 py-0.5 rounded cursor-pointer hover:bg-[#316ac5] hover:text-white"
+          >
+            One-way
+          </span>
+
+          <span
+            className="px-2 py-0.5 rounded"
+          >
+            Round-trip
+          </span>
+
+          <span
+            className="px-2 py-0.5 rounded"
+          >
+            Multi-city
+          </span>
         </div>
 
         {/* Form Body */}

@@ -18,6 +18,7 @@ import AllBooking from "./pages/admin/AllBooking";
 import { Splash } from "./components/Splash";
 import { StartUp } from "./components/StartUp";
 import { Footer } from "./components/Footer";
+import { NotFound } from "./components/NotFound";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -118,6 +119,8 @@ function App() {
           path="/admin/blogs/edit/:id"
           element={admin ? <BlogForm /> : <Navigate to="/sign-in" />}
         />
+
+        <Route path="*" element={<NotFound/>} />
       </Routes>
 
       <Footer />

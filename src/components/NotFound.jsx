@@ -1,14 +1,14 @@
 import React from "react";
+import { Link } from "react-router";
 
 export const NotFound = () => {
   return (
     <div
-      className="min-h-screen flex items-center justify-center"
-      style={{ background: "#004080" }}
+      className="flex-1 flex items-center justify-center py-8 px-4"
     >
       {/* XP Window */}
       <div
-        className="w-[480px]"
+        className="w-120"
         style={{
           border: "2px solid #0054e3",
           borderRadius: "8px 8px 0 0",
@@ -18,60 +18,38 @@ export const NotFound = () => {
       >
         {/* Title Bar */}
         <div
-          className="flex items-center gap-1.5 px-2 h-7"
+          className="flex items-center justify-between px-2 py-1"
           style={{
             background:
-              "linear-gradient(180deg,#0997ff 0%,#0264e8 6%,#0060e0 30%,#015ed8 100%)",
+              "linear-gradient(180deg,#1c74d4 0%,#1560c0 40%,#1458b8 100%)",
+            borderBottom: "1px solid #1a3a6a",
           }}
         >
-          <span className="text-sm">⚠️</span>
-          <span
-            className="text-white font-bold text-xs flex-1"
-            style={{ textShadow: "1px 1px 1px rgba(0,0,0,0.5)" }}
-          >
-            KhaleejiGo — Page Not Found
+          <span className="text-white font-bold text-sm">
+            ⚠️ KhalijiGo — Page Not Found
           </span>
-          <div className="flex gap-0.5">
-            <button
-              className="w-[19px] h-[19px] rounded text-[10px] font-bold flex items-center justify-center border border-[#888]"
-              style={{ background: "linear-gradient(180deg,#f0ede5,#d0ccc0)" }}
-            >
-              _
-            </button>
-            <button
-              className="w-[19px] h-[19px] rounded text-[10px] font-bold flex items-center justify-center border border-[#888]"
-              style={{ background: "linear-gradient(180deg,#f0ede5,#d0ccc0)" }}
-            >
-              □
-            </button>
-            <button
-              className="w-[19px] h-[19px] rounded text-[10px] font-bold flex items-center justify-center border border-[#901010] text-white"
-              style={{ background: "linear-gradient(180deg,#e8604c,#c0301c)" }}
-            >
-              ✕
-            </button>
+          <div className="flex gap-1">
+            {["─", "□", "✕"].map((s, i) => (
+              <button
+                key={i}
+                className="w-5 h-5 text-white text-[11px] flex items-center justify-center"
+                style={{
+                  border: "1px outset #7a9ac8",
+                  background: "linear-gradient(180deg,#4a7ab5,#2a5a95)",
+                }}
+              >
+                {s}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Menu Bar */}
-        <div
-          className="flex gap-0 px-1 py-0.5 text-[11px]"
-          style={{ background: "#d4d0c8", borderBottom: "1px solid #aca899" }}
-        >
-          {["File", "Edit", "View", "Help"].map((m) => (
-            <span
-              key={m}
-              className="px-2 py-0.5 rounded cursor-pointer hover:bg-[#316ac5] hover:text-white"
-            >
-              {m}
-            </span>
-          ))}
-        </div>
+        
 
         {/* Content */}
         <div className="flex gap-4 p-5" style={{ background: "#ece9d8" }}>
           {/* Error Icon */}
-          <div className="flex-shrink-0 flex items-start pt-1">
+          <div className="shrink-0 flex items-start pt-1">
             <div
               className="w-14 h-14 rounded-full flex items-center justify-center text-3xl"
               style={{
@@ -97,7 +75,7 @@ export const NotFound = () => {
                 className="text-[11px] text-[#333] leading-relaxed"
                 style={{ fontFamily: "Tahoma, sans-serif" }}
               >
-                KhaleejiGo cannot find the page you are looking for. The page
+                KhalijiGo cannot find the page you are looking for. The page
                 may have been moved, deleted, or never existed.
               </div>
             </div>
@@ -136,7 +114,7 @@ export const NotFound = () => {
                 ← Go Back
               </button>
               <Link
-                to="/"
+                to="/homepage"
                 className="text-[11px] px-4 py-1 cursor-pointer text-white font-bold no-underline flex items-center"
                 style={{
                   background:
@@ -169,7 +147,7 @@ export const NotFound = () => {
             className="text-[11px] px-1.5 ml-auto"
             style={{ border: "1px inset #808080" }}
           >
-            🔒 gcc-travel.com
+            🔒 KhalijiGo.com
           </span>
         </div>
       </div>
