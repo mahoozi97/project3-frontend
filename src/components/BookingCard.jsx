@@ -46,6 +46,12 @@ export const BookingCard = ({
         <div className="text-[15px] text-[#444] mt-0.5">
           Passenger: {name.toUpperCase()} &nbsp;|&nbsp; CPR: {cpr}
         </div>
+
+        {admin ? (
+          <div className="text-[15px] text-[#444] mt-0.5">
+            Mobile No.: {phoneNumber}
+          </div>
+        ) : null}
       </div>
 
       {/* Action Buttons */}
