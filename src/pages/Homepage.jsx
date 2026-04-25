@@ -7,7 +7,7 @@ function Homepage() {
   return (
     <div className="min-h-screen bg-[#3a6ea5] flex flex-col items-center pt-8 pb-8">
       <div
-        className="bg-[#ece9d8] w-200"
+        className="bg-[#ece9d8] md:w-200 w-100"
         style={{ border: "2px outset #d4d0c8" }}
       >
         <div
@@ -49,7 +49,7 @@ function Homepage() {
 
           <div className="w-full" style={{ borderTop: "1px inset #d4d0c8" }} />
 
-          <img src={bookNowImg} alt="Book Now" className="max-w-150" />
+          <img src={bookNowImg} alt="Book Now" className="md:w-200 w-100" />
 
           <Link to="/book-now">
             <button
@@ -62,7 +62,7 @@ function Homepage() {
 
           <div className="w-full" style={{ borderTop: "1px inset #d4d0c8" }} />
 
-          <img src={readMoreImg} alt="Read More" className="max-w-150" />
+          <img src={readMoreImg} alt="Read More" className="md:w-200 w-100" />
 
           <Link to="/blogs">
             <button
