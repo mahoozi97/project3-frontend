@@ -31,7 +31,7 @@ const BlogForm = () => {
       } else {
         await createBlog(formData);
       }
-      navigate("/admin-dashboard");
+      navigate("/admin-dashboard", { state: { tab: "blogs" } });
     } catch (err) {
       console.error("Save failed", err);
       setErrorMessage(err.response?.data?.error || err.message);

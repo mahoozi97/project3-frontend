@@ -5,7 +5,6 @@ import SignUp from "./pages/Signup";
 import SignIn from "./pages/SignIn";
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
-import AdminDashboard from "./pages/admin/AdminDashboard"; // Removed brackets if exported as default
 import { BookingForm } from "./pages/BookingForm";
 import { Spin } from "antd";
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -20,6 +19,7 @@ import { StartUp } from "./components/StartUp";
 import { Footer } from "./components/Footer";
 import { NotFound } from "./components/NotFound";
 import { AdminRoute } from "./components/AdminRoute";
+import { AdminDashboard } from "./pages/admin/AdminDashboard";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -97,11 +97,6 @@ function App() {
           <Route
             path="/admin-dashboard"
             element={<AdminDashboard admin={admin} />}
-          />
-
-          <Route
-            path="/admin-bookings"
-            element={<AllBooking admin={admin} />}
           />
 
           <Route path="/admin/blogs/create" element={<BlogForm />} />

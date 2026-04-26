@@ -98,13 +98,6 @@ function Navbar({ user, setUser, admin, setAdmin }) {
               >
                 Dashboard
               </NavLink>
-              <NavLink
-                className={navItemClass}
-                to="/admin-bookings"
-                onClick={() => setIsOpen(false)}
-              >
-                Bookings
-              </NavLink>
             </>
           ) : null}
         </div>
