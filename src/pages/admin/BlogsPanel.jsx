@@ -65,22 +65,6 @@ const BlogsPanel = () => {
                 <th className="px-3 py-1 text-[13px]">
                   <div className="flex items-center justify-between">
                     <span>Actions</span>
-                    <button
-                      onClick={() => navigate("/admin/blogs/create")}
-                      style={{
-                        background:
-                          "linear-gradient(180deg,#f5f4ee 0%,#d8d5c8 40%,#c8c5b8 100%)",
-                        borderTop: "1px solid #fff",
-                        borderLeft: "1px solid #fff",
-                        borderRight: "2px solid #808080",
-                        borderBottom: "2px solid #808080",
-                        cursor: "pointer",
-                        padding: "0px 8px",
-                        color: "#000",
-                      }}
-                    >
-                      + Blog
-                    </button>
                   </div>
                 </th>
               </tr>

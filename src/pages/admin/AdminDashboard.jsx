@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router";
 import BlogsPanel from "./BlogsPanel";
 
 export const AdminDashboard = ({admin}) => {
+  const navigate = useNavigate()
   const location = useLocation();
   const [toggle, setToggle] = useState(() => {
     if (location.state?.tab === "blogs") return false;
@@ -58,6 +59,13 @@ export const AdminDashboard = ({admin}) => {
           onClick={() => handleToggle(false)}
         >
           Blogs
+        </span>
+
+        <span
+          className="px-2 rounded cursor-pointer hover:bg-[#316ac5] hover:text-white"
+          onClick={() => navigate("/admin/blogs/create")}
+        >
+          Add Blogs
         </span>
       </div>
 
