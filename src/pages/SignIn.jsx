@@ -75,7 +75,7 @@ function SignIn({ setUser, setAdmin }) {
         <div className="p-5">
           {errorMessage && (
             <p
-              className="flex justify-center mb-3 text-[11px]"
+              className="flex justify-center mb-3 text-[14px]"
               style={{ color: "red" }}
               role="alert"
             >

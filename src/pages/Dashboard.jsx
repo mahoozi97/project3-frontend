@@ -51,7 +51,7 @@ function Dashboard({ user }) {
   }, []);
 
   return (
-    <div className="mx-2.5 flex flex-col gap-1.5 mb-2 mt-4">
+    <div className="mx-2.5 flex flex-col mb-2 mt-4">
       <div
         className="flex items-center justify-between px-2 py-1"
         style={{
