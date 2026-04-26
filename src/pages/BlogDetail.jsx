@@ -60,7 +60,7 @@ const BlogDetail = () => {
   if (!blog) {
     return (
       <div className="min-h-screen bg-[#3a6ea5] flex flex-col items-center pt-8 pb-8">
-        <Spin description="Loading..." size="large" />
+        <Spin style={{color: "white"}} description="Loading..." size="large" />
       </div>
     );
   }
