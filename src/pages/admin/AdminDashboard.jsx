@@ -43,7 +43,7 @@ export const AdminDashboard = ({admin}) => {
         </div>
       </div>
       <div
-        className="flex gap-0 px-1 text-[15px]"
+        className="flex gap-0 px-1 text-[12px]"
         style={{ background: "#d4d0c8", borderBottom: "1px solid #aca899" }}
       >
         <span
