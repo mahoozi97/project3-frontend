@@ -65,7 +65,7 @@ export const AdminDashboard = ({admin}) => {
           className="px-2 rounded cursor-pointer hover:bg-[#316ac5] hover:text-white"
           onClick={() => navigate("/admin/blogs/create")}
         >
-          Add Blogs
+          Add Blog
         </span>
       </div>
 
